@@ -34,6 +34,7 @@ export const upVote = (id) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
+  console.log(state)
   switch(action.type){
     case 'CREATE': 
       return state.concat(action.payload)
