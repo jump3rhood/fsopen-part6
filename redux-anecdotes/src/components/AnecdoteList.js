@@ -18,8 +18,7 @@ const AnecdoteList = () => {
       {sortedAnecdotes.map(anecdote =>
         <Anecdote key={anecdote.id} anecdote={anecdote} handleClick={() => {
           dispatch(upVote(anecdote.id))
-          dispatch(setNotification(`you voted ${anecdote.content}`))
-          setTimeout(() => dispatch(resetNotification()), 5000)
+          dispatch(setNotification(`you voted ${anecdote.content}`, 5000))
         } }/>
       )}
     </div>

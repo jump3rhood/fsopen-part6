@@ -29,7 +29,6 @@ export const initializeAnecdotes = () => {
 export const upVote = (id) => {
   return async (dispatch, getState) => {
     const updatedAnecdote = await anecdoteService.update(id)
-    console.log('anec to update: ', updatedAnecdote)
     const anecdotesList = getState().anecdotes.map(anecdote => anecdote.id !== id ? anecdote : updatedAnecdote)
     dispatch(setAnecdotes(anecdotesList))
   }
