@@ -1,12 +1,14 @@
 import { 
-  // QueryClient,
+  useQueryClient,
+  useMutation,
    useQuery } from 'react-query'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import { getAll } from './requests'
+import { getAll, updateAnecdote } from './requests'
 
 const App = () => {
-  // const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
+  const updateMutation = useMutation(updateAnecdote)
   const result = useQuery(
     'anecdotes',
     getAll, {
@@ -23,7 +25,14 @@ const App = () => {
     return <div>anecdote service not available due to problems in server</div>
   }
   const handleVote = (anecdote) => {
-    console.log('vote')
+    const updated = { ...anecdote, votes: anecdote.votes + 1}
+    updateMutation.mutate(updated, {
+      onSuccess: (changedAnecdote) => {
+        const list = queryClient.getQueryData('anecdotes')
+        const newAnecdotes = list.map(item => item.id !== changedAnecdote.id ? item : changedAnecdote)
+        queryClient.setQueryData('anecdotes', newAnecdotes)
+      }
+    })
   }
 
   const anecdotes = data

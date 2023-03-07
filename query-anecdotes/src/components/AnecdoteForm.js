@@ -1,7 +1,7 @@
-import { QueryClient, useMutation } from "react-query"
+import { useQueryClient, useMutation } from "react-query"
 import { createAnecdote } from "../requests"
 const AnecdoteForm = () => {
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
   const newMutation = useMutation(createAnecdote)
   const onCreate = (event) => {
     event.preventDefault()
@@ -9,8 +9,9 @@ const AnecdoteForm = () => {
     event.target.anecdote.value = ''
     console.log('new anecdote')
     newMutation.mutate({ content, votes: 0}, {
-      onSuccess: () => {
-        queryClient.invalidateQueries('anecdotes')
+      onSuccess: (newAnec) => {
+        const anecdotes = queryClient.getQueryData('anecdotes')
+        queryClient.setQueryData('anecdotes', anecdotes.concat(newAnec))
       }
     })
 }
