@@ -3,7 +3,7 @@
     {
       "content": "If it hurts, do it more often",
       "id": "47145",
-      "votes": 5
+      "votes": 12
     },
     {
       "content": "Adding manpower to a late software project makes it later!",
@@ -28,7 +28,7 @@
     {
       "content": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
       "id": "98312",
-      "votes": 0
+      "votes": 1
     },
     {
       "content": "In life, there are ups and downs",
@@ -37,7 +37,7 @@
     },
     {
       "content": "In life, there are ups and downs",
-      "votes": 4,
+      "votes": 5,
       "id": "GtVzWvQ"
     },
     {
@@ -54,6 +54,21 @@
       "content": "Eat jalebi",
       "votes": 8,
       "id": "GUDp-mc"
+    },
+    {
+      "content": "Just do it",
+      "votes": 0,
+      "id": "uGguk06"
+    },
+    {
+      "content": "Risk everything",
+      "votes": 0,
+      "id": "7jLuLO8"
+    },
+    {
+      "content": "An anecdote is simply a story that’s short and self-contained. ",
+      "votes": 1,
+      "id": "aOpZGrL"
     }
   ]
 }

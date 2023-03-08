@@ -5,8 +5,10 @@ import {
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import { getAll, updateAnecdote } from './requests'
+import { useNotificationDispatch } from './NotificationContext'
 
 const App = () => {
+  const notificationDispatch = useNotificationDispatch()
   const queryClient = useQueryClient()
   const updateMutation = useMutation(updateAnecdote)
   const result = useQuery(
@@ -17,7 +19,6 @@ const App = () => {
     }
   )
   const { data, status } = result
-  console.log(result)
   if(status === 'loading'){
     return <h1>Loading...</h1>
   }
@@ -31,8 +32,14 @@ const App = () => {
         const list = queryClient.getQueryData('anecdotes')
         const newAnecdotes = list.map(item => item.id !== changedAnecdote.id ? item : changedAnecdote)
         queryClient.setQueryData('anecdotes', newAnecdotes)
+        notificationDispatch({
+          type: 'SET',
+          payload: `anecdote '${anecdote.content}' had been voted`
+        })
       }
+      
     })
+    
   }
 
   const anecdotes = data
@@ -40,10 +47,8 @@ const App = () => {
   return (
     <div>
       <h3>Anecdote app</h3>
-    
       <Notification />
       <AnecdoteForm />
-    
       {anecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>
